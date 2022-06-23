@@ -36,7 +36,7 @@ const RSSFeedItems: ParentComponent<{ items: Array<RSSFeedItem>; }> = (props) =>
             <div class="collapse">
                 <input type="checkbox" />
                 <div class="collapse-title text-xl flex items-center justify-center font-medium">
-                    <button class="btn btn-primary">Expand items</button>
+                    <button class="btn btn-primary"> ITEMS </button>
                 </div>
                 <div class="collapse-content">
                     <div class="flex items-center justify-center mb-5">
