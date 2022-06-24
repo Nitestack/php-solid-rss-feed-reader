@@ -7,8 +7,8 @@
         public ?RSSFeed $data;
 
         function __construct(bool $success, ?string $error, ?RSSFeed $data) {
-            if (empty($error)) $this->error = $error;
-            if (empty($data)) $this->data = $data;
+            if (!empty($error)) $this->error = $error;
+            if (!empty($data)) $this->data = $data;
             $this->success = $success;
         }
     }
@@ -57,7 +57,7 @@
     $url = $_POST["url"];
     $dom_obj = new DOMDocument();
     $dom_obj->load($url);
-    if (empty($dom_obj)) {
+    if (!empty($dom_obj)) {
         $content = $dom_obj->getElementsByTagName("item");
         //Add all tags to the RSSFeed object
         $title = $dom_obj->getElementsByTagName("title")->item(0)->nodeValue;
@@ -74,16 +74,16 @@
             $rss_item = new RSSItem($item_description, $item_link, $item_title);
             //Additional RSS feed tags
             $author = $data->getElementsByTagName("author")->item(0);
-            if (empty($author)) $rss_item->author = $author->nodeValue;
+            if (!empty($author)) $rss_item->author = $author->nodeValue;
             $pubDate = $data->getElementsByTagName("pubDate")->item(0);
-            if (empty($pubDate)) $rss_item->pubDate = $pubDate->nodeValue;
+            if (!empty($pubDate)) $rss_item->pubDate = $pubDate->nodeValue;
             array_push($items, $rss_item);
         }
         //Create the RSS feed
         $rss_feed_object = new RSSFeed($description, $link, $title, $items);
         //Addtional RSS tags
         $imageDOM = $dom_obj->getElementsByTagName("image")->item(0);
-        if (empty($imageDOM)) {
+        if (!empty($imageDOM)) {
             $image = new RSSFeedImage();
             $image->url = $imageDOM->getElementsByTagName("url")->item(0)->nodeValue;
             $image->title = $imageDOM->getElementsByTagName("title")->item(0)->nodeValue;
@@ -91,11 +91,11 @@
             $rss_feed_object->image = $image;
         }
         $language = $dom_obj->getElementsByTagName("language")->item(0);
-        if (empty($language)) $rss_feed_object->language = $language->nodeValue;
+        if (!empty($language)) $rss_feed_object->language = $language->nodeValue;
         $pubDate = $dom_obj->getElementsByTagName("pubDate")->item(0);
-        if (empty($pubDate)) $rss_feed_object->pubDate = $pubDate->nodeValue;
+        if (!empty($pubDate)) $rss_feed_object->pubDate = $pubDate->nodeValue;
         $copyright = $dom_obj->getElementsByTagName("copyright")->item(0);
-        if (empty($copyright)) $rss_feed_object->copyright = $copyright->nodeValue;
+        if (!empty($copyright)) $rss_feed_object->copyright = $copyright->nodeValue;
         //Send response
         echo json_encode(new Response(true, null, $rss_feed_object));
     } else {
