@@ -6,4 +6,4 @@ This RSS Feed Reader is powered by the frontend JS framework [SolidJS](https://s
 
 ### Author
 
-#### [HydraNhani](https://github.com/HydraNhani)
+#### [Nitestack](https://github.com/Nitestack)
